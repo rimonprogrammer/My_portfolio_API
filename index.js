@@ -44,7 +44,8 @@ const DBConnect = async () =>{
 
         const db = await client.db("test");
         const projects = await db.collection("Projects");
-
+        const FAQ = await db.collection("FAQ");
+        
         app.get('/Projects', async (req, res) =>{
             const project = await projects.find().toArray();
             res.send(project)
@@ -56,6 +57,11 @@ const DBConnect = async () =>{
 
             const result = await projects.findOne({id : ids});
             res.send(result);
+        });
+
+        app.get('/FAQ', async(req, res) =>{
+            const faq = await FAQ.find().toArray();
+            res.send(faq);
         });
         
     } catch (error) {
